@@ -377,6 +377,16 @@ const HAN_COLORS = { ours: "#8B1A1A", baseline: "#D3D3D3", grid: "#BBBBBB" };
 - **Reference `axhline` hidden behind bars.** Set `zorder=4` (bars are `zorder=3`).
 - **Legend patch contrast.** `#D3D3D3` and `#BEBEBE` look nearly identical
   in the legend. Use `edgecolor="black"` on all legend patches.
+- **Legend floating too high, big blank gap above the panels.** Caused by
+  pushing `bbox_to_anchor`'s y above `1.00` (e.g. `1.06`) *and* shrinking
+  `tight_layout`'s `rect` top at the same time (e.g. `0.84`) — the two
+  compound, and `savefig(..., bbox_inches="tight")` then crops around
+  wherever the legend actually landed, leaving dead space between it and
+  the axes/titles. Keep `bbox_to_anchor=(0.5, 1.00)` fixed; only adjust
+  `rect`'s top value (e.g. `0.90` instead of `0.88`) if two-line titles
+  need more headroom. Real fix confirmed 2026-08-11 (see
+  experiments/pass_offload/analysis/plot_bm19_summary_bars.py's own git
+  history): `1.06`/`0.84` → `1.00`/`0.90` closed the gap.
 
 ---
 

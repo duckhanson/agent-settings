@@ -71,7 +71,7 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 - 開始新 session 時，先讀取最新一份 `logs/*.md`，確認上次的「下一步待辦」再開始工作。
 - Session 結束前，在 `logs/YYYY-MM-DD.md`（當天日期，檔案已存在則附加）寫入紀錄，包含：
   - `## 今日進度`：做了什麼（簡述，不逐行複述 code diff）
-  - `## 關鍵決策與理由`：任何偏離 spec.md 或 impl-plan.md 的地方，以及為什麼
+  - `## 關鍵決策與理由`：任何偏離 spec.md 或 impl-plan.md 的地方，以及為什麼——依 `docs/agents/decision-routing.md` 判斷：若通過 ADR 三條件測試或屬於某實驗 spec 決策，就寫去該去的地方（ADR / SPEC.md），這裡只留一句連結；只有純粹過程性、不夠格升級的決策才直接寫在這裡
   - `## 遇到的問題與解法`：踩過的坑、debug 過程的重要發現
   - `## 下一步待辦`：明確列出接下來要做的事，方便下次 session 或其他協作者接手
 - 紀錄要精簡，重點是「決策脈絡」而非流水帳；code 層級的變更可參考 git log，不需重複。
@@ -80,8 +80,6 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 ---
 
 **These guidelines are working if:** fewer unnecessary changes in diffs, fewer rewrites due to overcomplication, and clarifying questions come before implementation rather than after mistakes.
-
----
 
 ## Hard Constraints（不可違反）
 
@@ -94,3 +92,8 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 - 開發/寫程式前：先套用 `ponytail` skill，檢視是否為最小可行方案，避免過度工程化。
 - 寫/改 Python 程式碼時：套用 `google-python-style` skill，作為預設 coding style。
 - 畫圖/產生 figure 時：一律套用 `han-lab-plot-style` skill。
+
+### 相關規則文件
+- 決策文件該記在哪：見 `docs/agents/decision-routing.md`（glossary/spec/ADR/log 路由規則、ADR 三條件測試）
+- 寫實驗 spec：執行 `/to-spec` 一律用 `docs/agents/research-spec-template.md` 取代 skill 內建 PRD 模板（研究實驗沒有 persona）
+- grill-with-docs/多 context 佈局：見 `docs/agents/grill-workflow.md`、`CONTEXT-MAP.md`（不改 skill，靠專案設定接住）
